@@ -156,3 +156,7 @@ p:hover .star-btn{
 .card-image:hover .star-btn{
     visibility: visible;
 }
+
+.fixed-action-btn {
+    height: 20px;
+}
