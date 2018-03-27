@@ -131,7 +131,6 @@ $(document).ready(function () {
 
 //Functions
   function nowPlaying(page, apiUrl) {
-        pageInteger = 1;
         //Populates what's in theaters
         $.ajax({
           url: apiUrl + page,
@@ -178,7 +177,6 @@ $(document).ready(function () {
   };
 
   function topMovies(page, apiUrl) {
-    pageInteger = 1;
     //Populates top movies
     $.ajax({
       url: apiUrl + page,
