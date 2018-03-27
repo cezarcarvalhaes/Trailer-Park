@@ -26,6 +26,7 @@ $(document).ready(function () {
 
   var pageNumber = pageInteger.toString();
 
+
   var onScreen = "now playing";
 
   //on page load:
@@ -41,6 +42,14 @@ $(document).ready(function () {
     var tmdbApiKey = 'api_key=0c9ebd7d6e76fc10f179166f9acd0665';
     var tmdbImgUrl = 'https://image.tmdb.org/t/p/w185';
     nowPlaying(pageNumber, moviesURL);
+
+    $("#videos-display").append(posterImg);
+
+  });
+
+  $(document).on("click", "#maps", function () {
+    $("#modal1").empty();
+    $("#modal1").html(googleMaps);
   });
 
   //Top Movies
@@ -90,7 +99,6 @@ $(document).ready(function () {
     var divId = document.getElementById('streaming-services-' + unparsedTitle);
     $(divId).empty();
     $(divId).append('<p>Loading...<p>');
-
     $.ajax({
       url: uTellyURL + queryShowTitle,
       method: "GET",
@@ -182,44 +190,47 @@ $(document).ready(function () {
   function topMovies(page, apiUrl) {
     //Populates top movies
     $.ajax({
-      url: apiUrl + page,
+      url: searchMovieUrl + querySearch,
       method: "GET"
     }).then(function (response) {
+      console.log(response);
+      console.log(response.results[0].poster_path);
       for (var i = 0; i < response.results.length; i++) {
-        var title = response.results[i].title;
+        console.log(response.results[i].title);
         var posterPath = tmdbImgUrl + response.results[i].poster_path;
         if (posterPath.includes('null') === true){
           posterPath = "assets/images/placeholder.jpg";
         }
         var posterImg = `
-        <div class="poster-container">
-          <div class="card">
-            <div class="card-image waves-effect waves-block waves-light">
-              <img class="modal-trigger movie-poster" data-title = "${title}" src="${posterPath}" href="#modal1">
-              <a href="http://www.google.com" style="position:absolute;right:5px;bottom:5px" class="star-btn btn-floating yellow darken-1"><i class="material-icons">star_border</i></a>
+          <div class="poster-container">
+            <div class="card">
+              <div class="card-image waves-effect waves-block waves-light">
+                <img class="modal-trigger movie-poster" data-title = "${response.results[i].title}" src="${posterPath}" href="#modal1">
+                <a href="http://www.google.com" style="position:absolute;right:5px;bottom:5px" class="star-btn btn-floating yellow darken-1"><i class="material-icons">star_border</i></a>
+              </div>
+              <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">
+                  <div id="modal-btn-container">
+                  <a id="modal-btn" class="waves-effect waves-light btn modal-trigger" href="#modal1">${response.results[i].title}</a>
+                  <i id="more-vert-btn" class="material-icons right">more_vert</i>
+                  </div>
+                </span>
+              </div>
+              <div id = "${response.results[i].title}" class="card-reveal">
+                <span class="card-title grey-text text-darken-4">${response.results[i].title}<i class="material-icons right">close</i></span>
+                <p>${response.results[i].overview}</p>
+                <br>
+                <a data-title = "${response.results[i].title}" class="btn waves-effect waves-light streamable">Can I stream this?</a>
+                <div id = "streaming-services-${response.results[i].title}"></div>
+              </div>
             </div>
-            <div class="card-content">
-              <span class="card-title activator grey-text text-darken-4">
-                <div id="modal-btn-container">
-                <a id="modal-btn" class="waves-effect waves-light btn modal-trigger" href="#modal1">${title}</a>
-                <i id="more-vert-btn" class="material-icons right">more_vert</i>
-                </div>
-              </span>
-            </div>
-            <div id = "${title}" class="card-reveal">
-              <span class="card-title grey-text text-darken-4">${title}<i class="material-icons right">close</i></span>
-              <p>${response.results[i].overview}</p>
-              <br>
-              <a data-title = "${title}" class="btn waves-effect waves-light streamable">Can I Stream This?</a>
-              <div id = "streaming-services-${title}"></div>
-            </div>
-          </div>
-        </div>`;
+          </div>`;
 
         $("#videos-display").append(posterImg);
-        
       }
     });
+
+
 };
 
   function topTv(page, apiUrl) {
@@ -275,4 +286,5 @@ $(document).ready(function () {
       }
    });
   }
+
 });
