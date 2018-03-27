@@ -33,7 +33,8 @@ $(document).ready(function () {
   scrollPop();
 
   //In Theaters Now
-  $("#test1").on("click", function () {
+  $("#test1").on("click", function (event) {
+    event.preventDefault();
     onScreen = "now playing"
     pageNumber = "1";
     $("#videos-display").empty();
@@ -43,7 +44,8 @@ $(document).ready(function () {
   });
 
   //Top Movies
-  $("#test2").on("click", function () {
+  $("#test2").on("click", function (event) {
+    event.preventDefault();
     onScreen = "top movies"
     $("#videos-display").empty();
     pageNumber = "1";
@@ -53,7 +55,8 @@ $(document).ready(function () {
   });
 
   //Popular on TV
-  $("#test3").on("click", function () {
+  $("#test3").on("click", function (event) {
+    event.preventDefault();
     $("#videos-display").empty();
     onScreen = "tv";
     pageNumber = "1";
