@@ -2,6 +2,10 @@ body {
     background-image: url("../images/bg1.png");
 }
 
+p {
+    font-size: inherit;
+}
+
 /* .btn {
     color: white;
 } */
@@ -41,6 +45,10 @@ body {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+}
+
+#search {
+    width:250px;
 }
 
 .poster-container{
@@ -156,3 +164,41 @@ p:hover .star-btn{
 .card-image:hover .star-btn{
     visibility: visible;
 }
+
+#linkBack {
+    height: 0px;
+}
+
+@media only screen and (max-device-width : 569px) {
+    
+    .poster-container{
+        width:100%;
+        margin: 10px;
+    }
+
+    .main-btn {
+        width: 100%;
+    }
+
+    .search-bar{
+        visibility: hidden;
+        position: absolute;
+    }
+
+    }
+
+@media only screen and (min-device-width : 570px) and (max-device-width : 1024px) {
+    
+    .poster-container{
+        width:40%;
+        margin: 10px;
+    }
+    .main-btn {
+        width: 40%;
+    }
+    
+    #search-bar{
+       width: 100%; 
+    }
+
+    }
