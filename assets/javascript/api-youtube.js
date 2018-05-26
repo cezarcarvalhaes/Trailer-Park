@@ -43,11 +43,10 @@ $(document).ready(function () {
     var tmdbImgUrl = 'https://image.tmdb.org/t/p/w185';
     nowPlaying(pageNumber, moviesURL);
 
-        $("#videos-display").append(posterImg);
-      }
-    });
+    $("#videos-display").append(posterImg);
 
   });
+
 
   $(document).on("click", "#maps", function () {
     $("#modal1").empty();
@@ -142,20 +141,20 @@ $(document).ready(function () {
     topTv(region, searchTvUrl)
   });
 
-//Functions
+  //Functions
   function nowPlaying(page, apiUrl) {
-        //Populates what's in theaters
-        $.ajax({
-          url: apiUrl + page,
-          method: "GET"
-        }).then(function (response) {
-          for (var i = 0; i < response.results.length; i++) {
-            var title = response.results[i].title;
-            var posterPath = tmdbImgUrl + response.results[i].poster_path;
-            if (posterPath.includes('null') === true){
-              posterPath = "assets/images/placeholder.jpg";
-            }
-            var posterImg = `
+    //Populates what's in theaters
+    $.ajax({
+      url: apiUrl + page,
+      method: "GET"
+    }).then(function (response) {
+      for (var i = 0; i < response.results.length; i++) {
+        var title = response.results[i].title;
+        var posterPath = tmdbImgUrl + response.results[i].poster_path;
+        if (posterPath.includes('null') === true) {
+          posterPath = "assets/images/placeholder.jpg";
+        }
+        var posterImg = `
             <div class="poster-container">
               <div class="card">
                 <div class="card-image waves-effect waves-block waves-light">
@@ -178,15 +177,15 @@ $(document).ready(function () {
                 </div>
               </div>
             </div>`;
-    
-            $("#maps").on("click", function () {
-              $("#modal1").empty();
-              $("#modal1").html(googleMaps);
-            });
-    
-            $("#videos-display").append(posterImg);         
-          }
+
+        $("#maps").on("click", function () {
+          $("#modal1").empty();
+          $("#modal1").html(googleMaps);
         });
+
+        $("#videos-display").append(posterImg);
+      }
+    });
   };
 
   function topMovies(page, apiUrl) {
@@ -200,7 +199,7 @@ $(document).ready(function () {
       for (var i = 0; i < response.results.length; i++) {
         console.log(response.results[i].title);
         var posterPath = tmdbImgUrl + response.results[i].poster_path;
-        if (posterPath.includes('null') === true){
+        if (posterPath.includes('null') === true) {
           posterPath = "assets/images/placeholder.jpg";
         }
         var posterImg = `
@@ -233,21 +232,21 @@ $(document).ready(function () {
     });
 
 
-};
+  };
 
   function topTv(page, apiUrl) {
-        //Populates TV shows on screen
-        $.ajax({
-          url: apiUrl + page,
-          method: "GET"
-        }).then(function (response) {
-          for (var i = 0; i < response.results.length; i++) {
-            title = response.results[i].name
-            var posterPath = tmdbImgUrl + response.results[i].poster_path;
-            if (posterPath.includes('null') === true){
-              posterPath = "assets/images/placeholder.jpg";
-            }
-            var posterImg = `
+    //Populates TV shows on screen
+    $.ajax({
+      url: apiUrl + page,
+      method: "GET"
+    }).then(function (response) {
+      for (var i = 0; i < response.results.length; i++) {
+        title = response.results[i].name
+        var posterPath = tmdbImgUrl + response.results[i].poster_path;
+        if (posterPath.includes('null') === true) {
+          posterPath = "assets/images/placeholder.jpg";
+        }
+        var posterImg = `
               <div class="poster-container">
                 <div class="card">
                   <div class="card-image waves-effect waves-block waves-light">
@@ -271,22 +270,22 @@ $(document).ready(function () {
                 </div>
               </div>
             </div>`;
-    
-            $("#videos-display").append(posterImg);
-          }
-        });
+
+        $("#videos-display").append(posterImg);
+      }
+    });
   }
 
   function scrollPop() {
-    $(window).scroll(function() {
-      if($(window).scrollTop() + $(window).height() == $(document).height()) {
-          pageInteger++;
-          pageNumber = pageInteger.toString();
-          if (onScreen === "now playing") {nowPlaying(pageNumber, moviesURL)}
-          if (onScreen === "top movies") {topMovies(pageNumber, topMoviesUrl)}
-          if (onScreen === "tv") {topTv(pageNumber, topTvURL)}  
+    $(window).scroll(function () {
+      if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+        pageInteger++;
+        pageNumber = pageInteger.toString();
+        if (onScreen === "now playing") { nowPlaying(pageNumber, moviesURL) }
+        if (onScreen === "top movies") { topMovies(pageNumber, topMoviesUrl) }
+        if (onScreen === "tv") { topTv(pageNumber, topTvURL) }
       }
-   });
+    });
   }
 
 });
