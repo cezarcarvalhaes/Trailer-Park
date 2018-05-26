@@ -190,7 +190,7 @@ $(document).ready(function () {
   function topMovies(page, apiUrl) {
     //Populates top movies
     $.ajax({
-      url: searchMovieUrl,
+      url: apiUrl + page,
       method: "GET"
     }).then(function (response) {
       console.log(response);
