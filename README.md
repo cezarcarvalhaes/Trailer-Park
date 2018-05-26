@@ -4,6 +4,10 @@ Trailer Park is a web application that allows users to search for movie and TV c
 
 Check out the live site at: https://cezarcarvalhaes.github.io/Trailer-Park/
 
+---
+
+**Functionality**
+
 **In Theaters Now**
 The home page shows you what's currently in theaters. To navigate back from a different screen, simply click the "In Theaters Now" button. 
 
